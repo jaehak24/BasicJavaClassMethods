@@ -1,0 +1,38 @@
+package AOP;
+
+import proxy.Html;
+import proxy.IBrowser;
+
+public class AOPBrowser implements IBrowser {
+    private Html html;
+    private String url;
+    //AOP 는 앞과 뒤를 체크해야 하므로
+    private Runnable before;
+    private Runnable after;
+
+    public AOPBrowser(String url,Runnable before,Runnable after) {
+        this.url=url;
+        this.before=before;
+        this.after=after;
+    }
+
+    @Override
+    public Html show() {
+
+        before.run();
+        if(html==null) {
+            this.html=new Html(url);
+            System.out.println("AopBrowser html loading from: "+url);
+            try{
+                Thread.sleep(1500);
+            }catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        after.run();
+
+        System.out.println("AopBrowser html cache: "+url);
+        return null;
+    }
+}
