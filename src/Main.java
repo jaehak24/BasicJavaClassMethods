@@ -1,15 +1,5 @@
-import AOP.AOPBrowser;
-import DecoratorPattern.*;
-import adapter.*;
-import proxy.Browser;
-import proxy.BrowserProxy;
-import proxy.IBrowser;
-import singleton.Aclazz;
-import singleton.Bclazz;
-import singleton.SocketClient;
-
-import java.lang.ref.Cleaner;
-import java.util.concurrent.atomic.AtomicLong;
+import Observer.Button;
+import Observer.IButtonListener;
 
 public class Main {
     public static void main(String[] args)
@@ -92,6 +82,7 @@ public class Main {
         System.out.println(end.get());
         */
 
+        /* decorator 클래스 사용
         ICar audi=new Audi(1500);
         audi.showPrice();
 
@@ -107,6 +98,20 @@ public class Main {
         //a5
         ICar audi5=new A5(audi,"A5");
         audi5.showPrice();
+        */
+
+
+        Button button=new Button("버튼");
+        button.addButtonListener(new IButtonListener() {
+            @Override
+            public void clickEvent(String event) {
+                System.out.println(event); //이벤트가 생기면 전달받는 형태
+            }
+        });
+
+        button.click("메시지 전달: click 1");
+        button.click("메시지 전달: click 2");
+        button.click("메시지 전달: click 3");
 
 
 
