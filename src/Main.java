@@ -1,4 +1,5 @@
 import AOP.AOPBrowser;
+import DecoratorPattern.*;
 import adapter.*;
 import proxy.Browser;
 import proxy.BrowserProxy;
@@ -44,7 +45,7 @@ public class Main {
         powerON(adapter2);
 */
 
-        Browser browser=new Browser("www.naver.com");
+        //Browser browser=new Browser("www.naver.com");
 /*
         browser.show();
         browser.show();
@@ -64,7 +65,7 @@ public class Main {
          */
 
 
-        //AOP 일괄적으로 한 패키지에 있는 메소드들을 불러올 수 있는 형태
+        /*AOP 일괄적으로 한 패키지에 있는 메소드들을 불러올 수 있는 형태
 
 
         //시간 체크를 위해서
@@ -89,18 +90,40 @@ public class Main {
 
         browser2.show(); //두번째는 이미 캐쉬에 저장되어 있으므로 0초가 걸린다.
         System.out.println(end.get());
+        */
+
+        ICar audi=new Audi(1500);
+        audi.showPrice();
+
+        //각각의 등급을 설정
+
+        //a3
+        ICar audi3=new A3(audi,"A3");
+        audi3.showPrice();
+
+        //a4
+        ICar audi4=new A4(audi,"A4");
+        audi4.showPrice();
+        //a5
+        ICar audi5=new A5(audi,"A5");
+        audi5.showPrice();
+
 
 
     }
 
-    //220 콘센트
+    /*220 콘센트
     public static void  powerON(Elect_220v elect220v){
         elect220v.connect();
     }
-    //110 콘센트
+    */
+
+    /*110 콘센트
     public static void connect(Elect_110v elect_110v){
         elect_110v.powerOn();
     }
+
+     */
 
 
 }
