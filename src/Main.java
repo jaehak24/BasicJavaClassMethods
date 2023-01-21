@@ -4,6 +4,7 @@ import FacadePattern.SftpClient;
 import FacadePattern.Writer;
 import Observer.Button;
 import Observer.IButtonListener;
+import StarategyPattern.*;
 
 public class Main {
     public static void main(String[] args)
@@ -146,14 +147,39 @@ public class Main {
         writer.fileDisconnect();
         ftpClient.disconnect();
 
-        */
-
         //다음과 같이 간결한 코드로 변경
         SftpClient sftpClient=new SftpClient("www.fow.kr",2020,"/home/etc","test.tmp");
         sftpClient.connect();
         sftpClient.write();
         sftpClient.read();
         sftpClient.disconnect();
+
+        */
+        Encoder encoder=new Encoder();
+
+        //base64 전략
+        IEncodingStrategy base64=new Base64Strategy();
+
+        //normal
+        IEncodingStrategy normal=new NormalStrategy();
+
+        //append
+        IEncodingStrategy append=new AppendStrategy();
+
+        String msg="Hello world";
+
+        encoder.setEncodingStrategy(base64);
+        String base64result=encoder.getMessage(msg);
+        System.out.println(base64result);
+
+        encoder.setEncodingStrategy(normal);
+        String normalResult=encoder.getMessage(msg);
+        System.out.println(normalResult);
+
+        encoder.setEncodingStrategy(append);
+        String appendResult=encoder.getMessage(msg);
+        System.out.println(appendResult);
+
 
 
     }
