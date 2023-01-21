@@ -4,7 +4,13 @@ import FacadePattern.SftpClient;
 import FacadePattern.Writer;
 import Observer.Button;
 import Observer.IButtonListener;
+import SocketSingleton_Pr.ASocket;
+import SocketSingleton_Pr.BSocket;
+import SocketSingleton_Pr.SocketClient_PR;
 import StarategyPattern.*;
+import singleton.Aclazz;
+import singleton.Bclazz;
+import singleton.SocketClient;
 
 public class Main {
     public static void main(String[] args)
@@ -12,18 +18,20 @@ public class Main {
 
 
     {
-        /* singleton practice
-        Aclazz aclazz=new Aclazz();
-        Bclazz bclazz=new Bclazz();
+        //singleton practice
+        ASocket aSocket=new ASocket(SocketClient_PR.getInsatcne());
+        BSocket bSocket=new BSocket(SocketClient_PR.getInsatcne());
 
-        SocketClient aClient=aclazz.getSocketClient();
-        SocketClient bClient=bclazz.getSocketClient();
+
+        SocketClient_PR aUser=aSocket.getSocketClientPr();
+        SocketClient_PR bUser=bSocket.getSocketClientPr();
+
 
 
         System.out.println("두 개의 객체가 동일한가?");
-        System.out.println(aClient.equals(bClient));
+        System.out.println(aUser.equals(bUser));
 
-         */
+
 
         /*adapter 클래스 연습
         HairDryer hairDryer=new HairDryer();
@@ -155,6 +163,9 @@ public class Main {
         sftpClient.disconnect();
 
         */
+
+        //Strategy 디자인 패턴
+        /*
         Encoder encoder=new Encoder();
 
         //base64 전략
@@ -179,7 +190,7 @@ public class Main {
         encoder.setEncodingStrategy(append);
         String appendResult=encoder.getMessage(msg);
         System.out.println(appendResult);
-
+        */
 
 
     }
