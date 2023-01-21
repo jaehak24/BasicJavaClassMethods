@@ -1,3 +1,7 @@
+import FacadePattern.Ftp;
+import FacadePattern.Reader;
+import FacadePattern.SftpClient;
+import FacadePattern.Writer;
 import Observer.Button;
 import Observer.IButtonListener;
 
@@ -100,7 +104,8 @@ public class Main {
         audi5.showPrice();
         */
 
-
+        //Observer Pattern 연습
+        /*
         Button button=new Button("버튼");
         button.addButtonListener(new IButtonListener() {
             @Override
@@ -112,7 +117,43 @@ public class Main {
         button.click("메시지 전달: click 1");
         button.click("메시지 전달: click 2");
         button.click("메시지 전달: click 3");
+         */
 
+        //Facade 패턴 연습
+        /*
+        Facade를 적용하지 않은 코드
+        //클라이언트 생성
+
+        Ftp ftpClient=new Ftp("www.naver.com",8080, "/home/etc" );
+        ftpClient.connect();
+        ftpClient.moveDirectory();
+
+
+
+        //파일을 읽어오기
+        Reader reader=new Reader("text.tmp");
+        reader.fileConnect();
+        reader.fileRead();
+
+
+        //파일을 쓰기
+        Writer writer=new Writer("text.tmp");
+        writer.fileConnect();
+        writer.fileWrite();
+
+        //모든 연결 종료
+        reader.fileDisConnect();
+        writer.fileDisconnect();
+        ftpClient.disconnect();
+
+        */
+
+        //다음과 같이 간결한 코드로 변경
+        SftpClient sftpClient=new SftpClient("www.fow.kr",2020,"/home/etc","test.tmp");
+        sftpClient.connect();
+        sftpClient.write();
+        sftpClient.read();
+        sftpClient.disconnect();
 
 
     }
